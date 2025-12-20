@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gourangdi Computer Training Center</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:#FFF8E1}
+
+header{background:#800000;color:#fff;padding:20px;text-align:center}
+
+nav{display:flex;flex-wrap:wrap;justify-content:center;background:#fff}
+nav button{border:none;background:none;padding:14px 18px;cursor:pointer;font-size:15px}
+nav button.active,nav button:hover{background:#800000;color:#fff}
+
+section{display:none;padding:20px}
+section.active{display:block}
+.container{max-width:1100px;margin:auto}
+
+.courses{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px
+}
+.card{
+ background:#fff;
+ padding:15px;
+ border-radius:6px;
+ box-shadow:0 2px 6px rgba(0,0,0,.1);
+ text-align:center;
+ cursor:pointer;
+ transition:.3s;
+}
+.card:hover{
+ background:#800000;
+ color:#fff;
+ transform:translateY(-3px)
+}
+
+form{background:#fff;padding:20px;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+label{display:block;margin-top:12px;font-weight:bold}
+input,select,textarea{width:100%;padding:10px;margin-top:6px}
+
+button.submit{
+ margin-top:15px;
+ background:#800000;
+ color:#fff;
+ border:none;
+ padding:12px;
+ font-size:16px;
+ cursor:pointer
+}
+
+footer{background:#800000;color:#fff;text-align:center;padding:15px;margin-top:30px}
+
+iframe{width:100%;height:300px;border:0}
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px;text-align:center;border:1px solid #999}
+
+.search-box{
+ width:360px;
+ padding:8px;
+ margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>GOURANGDI COMPUTER TRAINING CENTER</h1>
+<p>Registered Under <b>Ministry of MSME, Government of India</b> | Affiliated by <b>ALPHA PLUS</b></p>
+<p>ISO 9001:2015</p>
+<p><b>Certified Institute</b></p>
+<p>Regd. Under <b>Govt. of West Bengal</b> (No: L/59464)</p>
+</header>
+
+<nav>
+<button class="active" onclick="showTab('home',this)">Home</button>
+<button onclick="showTab('about',this)">About Our Center</button>
+<button onclick="showTab('courses',this)">Courses</button>
+<button onclick="showTab('admission',this)">Online Admission</button>
+<button onclick="showTab('contact',this)">Contact Details</button>
+<button onclick="adminLogin()">Admin</button>
+</nav>
+
+<section id="home" class="active">
+<div class="container">
+<h2>Welcome</h2>
+<p>
+Welcome to <b>Gourangdi Computer Training Center</b><br>
+We warmly welcome you to our institute, where learning meets technology.<br>
+Our goal is to provide quality computer education, practical skills, and a supportive learning environment to help you build a successful future.
+</p>
+<p><b>Learn • Grow • Succeed with Us</b></p>
+<button class="submit" onclick="showTab('courses')">Select the Course and Enroll Now</button>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<h2>About Our Center</h2>
+<ul>
+<li>Expert Faculty (Male 15 years & Female 10 years experience)</li>
+<li>Classes 5 days a week with practical & theory</li>
+<li>Affordable course fees</li>
+<li>One computer per student</li>
+<li>100% satisfaction-oriented classes</li>
+<li>Free Spoken English & Typing Test</li>
+<li>Online Result Verification</li>
+<li>Certificates accepted by Govt. Enterprises & Employment Exchange</li>
+</ul>
+</div>
+</section>
+
+<section id="courses">
+<div class="container">
+<h2>Courses Offered</h2>
+<div class="courses">
+<div class="card" onclick="selectCourse('Diploma')">Diploma</div>
+<div class="card" onclick="selectCourse('Advanced Diploma')">Advanced Diploma</div>
+<div class="card" onclick="selectCourse('CCA')">CCA</div>
+<div class="card" onclick="selectCourse('CFA')">CFA</div>
+<div class="card" onclick="selectCourse('DTP')">DTP</div>
+<div class="card" onclick="selectCourse('DCA')">DCA</div>
+<div class="card" onclick="selectCourse('DFA')">DFA</div>
+<div class="card" onclick="selectCourse('DDTP')">DDTP</div>
+<div class="card" onclick="selectCourse('Hardware & Networking')">Hardware & Networking</div>
+<div class="card" onclick="selectCourse('Java')">Java</div>
+<div class="card" onclick="selectCourse('Python')">Python</div>
+<div class="card" onclick="selectCourse('HTML')">HTML</div>
+<div class="card" onclick="selectCourse('C++')">C++</div>
+<div class="card" onclick="selectCourse('Vishal Studio')">Vishal Studio</div>
+<div class="card" onclick="selectCourse('Tally ERP with GST')">Tally ERP with GST</div>
+<div class="card" onclick="selectCourse('Tally Prime')">Tally Prime</div>
+</div>
+</div>
+</section>
+
+<section id="admission">
+<div class="container">
+<h2>Online Admission</h2>
+
+<form id="admissionForm">
+<label>Student Name *</label>
+<input type="text" id="studentName" required>
+
+<label>Father's Name *</label>
+<input type="text" id="fatherName" required>
+
+<label>Class *</label>
+<select id="studentClass" required>
+<option value="">Select</option>
+<option>Class 5</option>
+<option>Class 6</option>
+<option>Class 7</option>
+<option>Class 8</option>
+<option>Class 9</option>
+<option>Class 10</option>
+<option>Class 11</option>
+<option>Class 12</option>
+<option>Undergraduate</option>
+<option>Graduate</option>
+</select>
+
+<label>Email *</label>
+<input type="email" id="email" required>
+
+<label>Phone *</label>
+<input type="tel" id="phone" pattern="[6-9][0-9]{9}" required>
+
+<label>Interested Course *</label>
+<select id="interestedCourse" required>
+<option value="">Select a course</option>
+<option>Diploma</option>
+<option>Advanced Diploma</option>
+<option>CCA</option>
+<option>CFA</option>
+<option>DTP</option>
+<option>DCA</option>
+<option>DFA</option>
+<option>DDTP</option>
+<option>Hardware & Networking</option>
+<option>Java</option>
+<option>Python</option>
+<option>HTML</option>
+<option>C++</option>
+<option>Vishal Studio</option>
+<option>Tally ERP with GST</option>
+<option>Tally Prime</option>
+</select>
+
+<label>Previous Computer Experience</label>
+<textarea id="experience"></textarea>
+
+<button type="submit" class="submit">Submit</button>
+</form>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<h2>Contact</h2>
+<p><b>Phone:</b> 9733386162</p>
+<p><b>Email:</b> gourangdicomputerirfan@gmail.com</p>
+<p><b>Address:</b> Rupnarayanpur – Panuria Road, Gourangdi, West Bengal 713315</p>
+<iframe src="https://www.google.com/maps?q=Rupnarayanpur%20Panuria%20Road%20Gourangdi%20West%20Bengal&output=embed"></iframe>
+</div>
+</section>
+
+<section id="admin">
+<div class="container">
+<h2>Admission Records</h2>
+
+<input type="text" id="searchInput" class="search-box"
+placeholder="Search by Name / Phone / Email / Course..."
+onkeyup="searchTable()">
+
+<div id="adminData"></div>
+</div>
+</section>
+
+<footer>
+<p>© 2025 Gourangdi Computer Training Center<br>
+Phone: 9733386162 | Email: gourangdicomputerirfan@gmail.com</p>
+</footer>
+
+<script>
+function showTab(id,btn){
+ document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ if(btn) btn.classList.add('active');
+}
+
+function selectCourse(course){
+ showTab('admission');
+ document.getElementById('interestedCourse').value = course;
+}
+
+document.getElementById('admissionForm').addEventListener('submit',function(e){
+ e.preventDefault();
+
+ const now=new Date();
+ const dateTime=now.toLocaleString('en-IN');
+
+ const data={
+  name:studentName.value,
+  father:fatherName.value,
+  cls:studentClass.value,
+  email:email.value,
+  phone:phone.value,
+  course:interestedCourse.value,
+  experience:experience.value,
+  date:dateTime
+ };
+
+ const list=JSON.parse(localStorage.getItem('admissions')||'[]');
+ list.push(data);
+ localStorage.setItem('admissions',JSON.stringify(list));
+
+ alert('Thank you for your submission. We will contact you soon.');
+ this.reset();
+});
+
+function adminLogin(){
+ const pass=prompt('Enter Admin Password');
+ if(pass==='0805'){
+  showTab('admin');
+  renderAdminTable();
+ }else{
+  alert('Unauthorized Access');
+ }
+}
+
+function renderAdminTable(){
+ const list=JSON.parse(localStorage.getItem('admissions')||'[]');
+ let html=`<table id="admissionTable">
+ <tr>
+ <th>Date</th><th>Name</th><th>Father</th><th>Class</th>
+ <th>Email</th><th>Phone</th><th>Course</th><th>Experience</th><th>Delete</th>
+ </tr>`;
+
+ list.forEach((r,i)=>{
+  html+=`<tr>
+   <td>${r.date}</td>
+   <td>${r.name}</td>
+   <td>${r.father}</td>
+   <td>${r.cls}</td>
+   <td>${r.email}</td>
+   <td>${r.phone}</td>
+   <td>${r.course}</td>
+   <td>${r.experience||''}</td>
+   <td><button onclick="deleteRecord(${i})">Delete</button></td>
+  </tr>`;
+ });
+
+ html+='</table>';
+ adminData.innerHTML=html;
+}
+
+function searchTable(){
+ let filter=document.getElementById('searchInput').value.toLowerCase();
+ let rows=document.querySelectorAll('#admissionTable tr');
+
+ rows.forEach((row,index)=>{
+  if(index===0) return;
+  row.style.display=row.innerText.toLowerCase().includes(filter)?'':'none';
+ });
+}
+
+function deleteRecord(index){
+ if(confirm('Are you sure you want to permanently delete this record?')){
+  const list=JSON.parse(localStorage.getItem('admissions'));
+  list.splice(index,1);
+  localStorage.setItem('admissions',JSON.stringify(list));
+  renderAdminTable();
+ }
+}
+</script>
+
+</body>
+</html>
