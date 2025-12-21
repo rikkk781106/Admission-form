@@ -215,8 +215,10 @@ Our goal is to provide quality computer education, practical skills, and a suppo
 <h2>Admission Records</h2>
 
 <input type="text" id="searchInput" class="search-box"
-placeholder="Search by Name / Phone / Email / Course..."
-onkeyup="searchTable()">
+placeholder="Search by Name / Phone / Email / Course..." disabled>
+
+<p style="color:red;">Admin panel works only via Google Sheet.</p>
+<p>Open your Google Sheet to view data.</p>
 
 <div id="adminData"></div>
 </div>
@@ -228,100 +230,52 @@ Phone: 9733386162 | Email: gourangdicomputerirfan@gmail.com</p>
 </footer>
 
 <script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzNNNezW4BUAfofj0D9r62zwF_ZLhKTToiXjPqxnQDVmwhgMYptJD4w6ReDzZXFxcRU/exec";
+
 function showTab(id,btn){
- document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
- if(btn) btn.classList.add('active');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 }
 
 function selectCourse(course){
- showTab('admission');
- document.getElementById('interestedCourse').value = course;
+  showTab('admission');
+  document.getElementById('interestedCourse').value = course;
 }
 
-document.getElementById('admissionForm').addEventListener('submit',function(e){
- e.preventDefault();
+document.getElementById('admissionForm').addEventListener('submit', function(e){
+  e.preventDefault();
 
- const now=new Date();
- const dateTime=now.toLocaleString('en-IN');
+  const data = {
+    name: document.getElementById('studentName').value,
+    father: document.getElementById('fatherName').value,
+    class: document.getElementById('studentClass').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    course: document.getElementById('interestedCourse').value,
+    experience: document.getElementById('experience').value
+  };
 
- const data={
-  name:studentName.value,
-  father:fatherName.value,
-  cls:studentClass.value,
-  email:email.value,
-  phone:phone.value,
-  course:interestedCourse.value,
-  experience:experience.value,
-  date:dateTime
- };
-
- const list=JSON.parse(localStorage.getItem('admissions')||'[]');
- list.push(data);
- localStorage.setItem('admissions',JSON.stringify(list));
-
- alert('Thank you for your submission. We will contact you soon.');
- this.reset();
+  fetch(WEB_APP_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res=>res.json())
+  .then(()=>{
+    alert("Admission submitted successfully!");
+    document.getElementById('admissionForm').reset();
+  })
+  .catch(()=>{
+    alert("Submission failed. Try again later.");
+  });
 });
 
 function adminLogin(){
- const pass=prompt('Enter Admin Password');
- if(pass==='0805'){
-  showTab('admin');
-  renderAdminTable();
- }else{
-  alert('Unauthorized Access');
- }
-}
-
-function renderAdminTable(){
- const list=JSON.parse(localStorage.getItem('admissions')||'[]');
- let html=`<table id="admissionTable">
- <tr>
- <th>Date</th><th>Name</th><th>Father</th><th>Class</th>
- <th>Email</th><th>Phone</th><th>Course</th><th>Experience</th><th>Delete</th>
- </tr>`;
-
- list.forEach((r,i)=>{
-  html+=`<tr>
-   <td>${r.date}</td>
-   <td>${r.name}</td>
-   <td>${r.father}</td>
-   <td>${r.cls}</td>
-   <td>${r.email}</td>
-   <td>${r.phone}</td>
-   <td>${r.course}</td>
-   <td>${r.experience||''}</td>
-   <td><button onclick="deleteRecord(${i})">Delete</button></td>
-  </tr>`;
- });
-
- html+='</table>';
- adminData.innerHTML=html;
-}
-
-function searchTable(){
- let filter=document.getElementById('searchInput').value.toLowerCase();
- let rows=document.querySelectorAll('#admissionTable tr');
-
- rows.forEach((row,index)=>{
-  if(index===0) return;
-  row.style.display=row.innerText.toLowerCase().includes(filter)?'':'none';
- });
-}
-
-function deleteRecord(index){
- if(confirm('Are you sure you want to permanently delete this record?')){
-  const list=JSON.parse(localStorage.getItem('admissions'));
-  list.splice(index,1);
-  localStorage.setItem('admissions',JSON.stringify(list));
-  renderAdminTable();
- }
+  alert("Admin panel is only via your Google Sheet.");
 }
 </script>
 
 </body>
 </html>
-
-
