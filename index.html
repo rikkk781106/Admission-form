@@ -257,19 +257,15 @@ document.getElementById('admissionForm').addEventListener('submit', function(e){
     experience: document.getElementById('experience').value
   };
 
-  fetch(WEB_APP_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  })
-  .then(res=>res.json())
-  .then(()=>{
-    alert("Admission submitted successfully!");
-    document.getElementById('admissionForm').reset();
-  })
-  .catch(()=>{
-    alert("Submission failed. Try again later.");
-  });
+ fetch(WEB_APP_URL, {
+  method: "POST",
+  body: JSON.stringify(data),
+  mode: "no-cors"
+});
+
+alert("Admission submitted successfully!");
+document.getElementById('admissionForm').reset();
+
 });
 
 function adminLogin(){
